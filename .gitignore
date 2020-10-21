@@ -27,3 +27,5 @@ yarn-error.log*
 .idea
 build
 node_modules
+/npx
+/yarn.lock
