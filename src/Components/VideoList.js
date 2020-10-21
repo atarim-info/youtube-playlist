@@ -2,31 +2,13 @@ import React, { Component } from 'react';
 // import SearchBar from './SearchBar';
 import VideoListItem from './VideoListItem';
 import { List } from 'antd';
-import crud from '../Libs/CRUDApiLib';
 
 class VideoList extends Component {
     state = {
         data: []
     };
 
-    loadData() {
-        crud.get('/videotrack', {
-
-        }).then((
-            response) => {
-                const videoIds = response.data.items;
-                console.log(videoIds);
-            }
-        ).catch(
-            error => {
-                // handle error
-                console.log(error);
-            })
-    }
-
     render() {
-        this.loadData();
-
         if( this.props.videos.length === 0 ) {
             return (
                 <div style={{ "display": "flex", "flexDirection": "column"  }}>

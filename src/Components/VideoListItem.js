@@ -6,9 +6,9 @@ class VideoListItem extends Component {
         const imageUrl = video.snippet.thumbnails.default.url;
         return (
             <li onClick={ () => this.props.onUserSelected() } style={{ "border": "1px solid #efefef", "marginBottom": "3px", "borderRadius": "5px"}}>
-                <div>
+                <div style={{ "display": "flex", "flexWrap": "nowrap"  }} >
                     <img src={ imageUrl } alt={ video.snippet.title }/>
-                    <span style={{ "color": "#444"}}>{ video.snippet.title }</span>
+                    <span style={{ "color": "#444", "marginLeft": "3px"}}>{ video.snippet.title }</span>
                 </div>
             </li>
         );

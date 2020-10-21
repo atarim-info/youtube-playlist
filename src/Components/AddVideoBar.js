@@ -8,8 +8,15 @@ import './AddVideoBar.css';
 class AddVideoBar extends Component {
 
     state = {
-        videoId: null
+        video: null,
+        videoId: null,
     };
+
+    componentDidUpdate(prevProps) {
+        if( this.props.video && ( prevProps.video !== this.props.video)  ) {
+            this.setState({ video: this.props.video })
+        }
+    }
 
     handleChange = (event) => {
         console.log(event.target.value);
@@ -32,35 +39,48 @@ class AddVideoBar extends Component {
                 }
             }).then(
                 response => {
+                    const video = response.data.items[0];
                     this.setState({
-                        videos: response.data.items
+                        video: video
                     })
-                    console.log(process.env.REACT_APP_BACKEND_URL);
 
-                    crud.post('/videotrack', {
-                        data: {
-                            videoId: videoId
-                        }
-                    }).then((
-                        response) => {
-                            this.props.handleFormSubmit(this.state.video);
-                        }
-                    ).catch(
-                        error => {
-                        // handle error
-                        console.log(error);
+                    notification.open({
+                        message: 'Video ' + videoId + ' found on YouTube',
+                        description: video.snippet.title,
+                        icon: <SmileTwoTone twoToneColor="#108ee9"/>
                     })
+                    //console.log(process.env.REACT_APP_BACKEND_URL);
+                    this.props.handleFormSubmit(video);
+                    this.add2DB(videoId);
+
                 }
             ).catch(error => {
-                    // handle error
+                    // handle error YouTube fetch error
                     console.log(error);
                     notification.open({
-                        message: 'Video $videoId not found',
+                        message: 'Video ' + videoId + ' not found on YouTube',
                         description: 'Please try again',
-                        icon: <SmileTwoTone twoToneColor="#108ee9"/>
+                        icon: <SmileTwoTone  rotate={180} twoToneColor="#eb2f96"/>
                     })
                 }
             );
+
+    }
+
+    add2DB(videoId) {
+        crud.post('/videotrack', {
+            data: {
+                videoId: videoId
+            }
+        }).then((
+            response) => {
+                this.props.handleFormSubmit(this.state.video);
+            }
+        ).catch(
+            error => {
+                // handle error
+                console.log(error);
+            })
     }
 
     render() {
