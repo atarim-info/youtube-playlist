@@ -1,0 +1,7 @@
+.ui-form {
+    textAlign: center;
+    background: #123456;
+    padding: 20px;
+    display: flex;
+    flexWrap: nowrap;
+}
