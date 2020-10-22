@@ -10,7 +10,10 @@ import './App.css';
 import crud from "./Libs/CRUDApiLib";
 
 import dotenv from 'dotenv';
+import youtube from "./Libs/YouTubeLib";
 dotenv.config();
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 class App extends Component {
 
@@ -25,7 +28,7 @@ class App extends Component {
 
   async componentDidMount() {
     this.welcome();
-    this.loadData();
+    await this.loadData();
   }
 
   welcome = () => {
@@ -38,17 +41,76 @@ class App extends Component {
 
   handleWatchComplete = ({played}) => {
     console.log(played);
-    if (played === 1) {
-      //user selected
+    if (played == 1) {
+        let videos = this.state.videos;
+        let nextVideoIndex = 0;
+        videos.forEach((video, index) => {
+            if (video == this.state.selectedVideo) {
+                if (index < videos.size && nextVideoIndex == 0) {
+                    nextVideoIndex = index + 1;
+                }
+            }
+        })
+        this.setState({
+            selectedVideo: this.state.videos[nextVideoIndex]
+        })//next selected
     }
   };
 
-  loadData = () => {
+  loadData2 = async () => {
+    fetch(BACKEND_URL + '/videotrack', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+        .then((res) => res.json())
+        .then((body) => {
+          const videoIds = "";
+          body.forEach((videotrack, index) => {
+            console.log(videotrack);
+            if (index > 0) {
+              videoIds.concat(",")
+            }
+            videoIds.concat(videotrack.videoId);
+          })
+          console.log(videoIds);
+        })
+  }
+
+  loadData = async () => {
     crud.get('/videotrack').then((
         response) => {
           console.log(response);
-          // const videoIds = response.data.items;
-          // console.log(videoIds);
+          const data = response.data;
+          let videoIds = "";
+          data.forEach((videotrack, index) => {
+            console.log(videotrack);
+            if (index > 0) {
+              videoIds = videoIds.concat(",")
+            }
+            videoIds = videoIds.concat(videotrack.videoId);
+          })
+          console.log(videoIds);
+          youtube.get('/videos',{
+            params: {
+              id: videoIds
+            }
+          }).then(
+              response => {
+                const videos = response.data.items;
+                this.setState({
+                  selectedVideo: videos[0],
+                  videos: videos
+                })
+                //this.props.handleFormSubmit(video);
+              }
+          ).catch(error => {
+                // handle error YouTube fetch error
+                console.log(error);
+              }
+          );
         }
     ).catch(
         error => {
