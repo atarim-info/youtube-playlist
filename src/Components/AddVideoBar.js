@@ -69,12 +69,10 @@ class AddVideoBar extends Component {
 
     add2DB(videoId) {
         crud.post('/videotrack', {
-            data: {
-                videoId: videoId
-            }
+             videoId: videoId
         }).then((
             response) => {
-                this.props.handleFormSubmit(this.state.video);
+            console.log(response.data);
             }
         ).catch(
             error => {

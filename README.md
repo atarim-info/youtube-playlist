@@ -1,6 +1,25 @@
 # youtube-playlist
 React Client Application for playing custom playlist of YouTube videos
 
+ 1. Run `yarn install`
+ 2. Run client App. `yarn start`
+ 3. Open browser http://localhost:3000
+ 4. In the Video Id field put Video Id _ofdSnD0b1YU_ from the url https://www.youtube.com/watch?v=ofdSnD0b1YU
+ 5. Try to put non existing Video Id.
+
+###Resources for this project:
+
+[Make Your Own Youtube player in React using youtube data API v3](https://hackernoon.com/make-your-own-youtube-player-in-react-using-youtube-data-api-v3-4b9bb5403a87)
+Originally published by Devyendu Shekhar on February 12th 2019 
+The result will look like [this](http://ytsearch.surge.sh/).
+Here is the [link](https://github.com/dsc712/Youtube-Player-In-Reacthttps://github.com/dsc712/Youtube-Player-In-React) for GitHub repository
+
+See also project: [Make a simple React app using YouTube API](https://blog.bitsrc.io/make-a-simple-react-app-with-using-youtube-api-68fa016e5a03)
+Here is the [link]( https://github.com/anarsultani97/modern-react-redux) for GitHub repository
+ 
+The [youtube-playlist-backend](https://github.com/atarim-info/youtube-playlist-backend) server based on project: docker-node-mongo
+Here is the [link](https://github.com/kriscfoster/docker-node-mongo-todo-app) for GitHub repository.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
