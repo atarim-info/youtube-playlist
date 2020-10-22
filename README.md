@@ -7,7 +7,7 @@ React Client Application for playing custom playlist of YouTube videos
  4. In the Video Id field put Video Id _ofdSnD0b1YU_ from the url https://www.youtube.com/watch?v=ofdSnD0b1YU
  5. Try to put non existing Video Id.
 
-###Resources for this project:
+### Resources for this project:
 
 [Make Your Own Youtube player in React using youtube data API v3](https://hackernoon.com/make-your-own-youtube-player-in-react-using-youtube-data-api-v3-4b9bb5403a87)
 Originally published by Devyendu Shekhar on February 12th 2019 
