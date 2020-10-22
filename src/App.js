@@ -41,12 +41,12 @@ class App extends Component {
 
   handleWatchComplete = ({played}) => {
     console.log(played);
-    if (played == 1) {
+    if (played === 1) {
         let videos = this.state.videos;
         let nextVideoIndex = 0;
         videos.forEach((video, index) => {
-            if (video == this.state.selectedVideo) {
-                if (index < videos.size && nextVideoIndex == 0) {
+            if (video === this.state.selectedVideo) {
+                if (index < videos.size && nextVideoIndex === 0) {
                     nextVideoIndex = index + 1;
                 }
             }
